@@ -1,6 +1,7 @@
 import { fastifyCors } from '@fastify/cors'
 import fastifyMultipart from '@fastify/multipart'
 import fastifySwagger from '@fastify/swagger'
+import fastifySwaggerUi from '@fastify/swagger-ui'
 import { fastify } from 'fastify'
 import {
   hasZodFastifySchemaValidationErrors,
@@ -9,7 +10,6 @@ import {
   validatorCompiler,
 } from 'fastify-type-provider-zod'
 import { uploadImageRoute } from './routes/upload-image'
-import fastifySwaggerUi from '@fastify/swagger-ui'
 
 const server = fastify()
 
@@ -39,14 +39,14 @@ server.register(fastifySwagger, {
     info: {
       title: 'Upload Server',
       version: '1.0.0',
-    }
+    },
   },
 
   transform: jsonSchemaTransform,
 })
 
 server.register(fastifySwaggerUi, {
-  routePrefix: '/docs'
+  routePrefix: '/docs',
 })
 
 server.register(uploadImageRoute)
