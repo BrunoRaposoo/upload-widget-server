@@ -1,4 +1,4 @@
-import { pgTable, text, time } from 'drizzle-orm/pg-core'
+import { pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 import { uuidv7 } from 'uuidv7'
 
 export const uploads = pgTable('uploads', {
@@ -8,5 +8,5 @@ export const uploads = pgTable('uploads', {
   name: text('name').notNull(),
   remoteKey: text('remote_key').notNull().unique(),
   remoteUrl: text('remote_url').notNull(),
-  createdAt: time('created_at').defaultNow().notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 })
