@@ -21,7 +21,7 @@ COPY --from=dependencies /usr/src/app/node_modules ./node_modules
 RUN pnpm build
 RUN pnpm prune --prod
 
-FROM node:20-alpine3.21 AS deploy
+FROM cgr.dev/chainguard/node:latest AS deploy
 
 USER 1000
 
@@ -33,4 +33,4 @@ COPY --from=build /usr/src/app/package.json ./package.json
 
 EXPOSE 3333
 
-CMD ["node", "dist/infra/http/server.js"]
+CMD ["dist/infra/http/server.js"]
