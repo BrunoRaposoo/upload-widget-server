@@ -18,8 +18,8 @@ jobs:
         id: configure-node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-      
+          node-version: 24
+
       - name: Install pnpm
         id: install-pnpm
         uses: pnpm/action-setup@v4
@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         id: install-dependencies
         run: |
-          pnpm Install
+          pnpm install
 
       - name: Configure AWS Credentials
         id: configure-aws-credentials
@@ -48,7 +48,7 @@ jobs:
         run: |
           SHA=$(echo $GITHUB_SHA | head -c7)
           echo "sha=$SHA" >> $GITHUB_OUTPUT
-      
+
       - name: Build and push the image to AWS ECR
         uses: docker/build-push-action@v6
         with:
